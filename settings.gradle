@@ -1,0 +1,2 @@
+rootProject.name='screens2'
+include ':app'

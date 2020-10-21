@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">screens2</string>
+    <string name="get_back">back</string>
+    <string name="update_user">update user</string>
+    <string name="new_event">new event</string>
+    <string name="update_event">update event</string>
+    <string name="login_button">login</string>
+    <string name="register_button">register</string>
+    <string name="events_button">events</string>
+</resources>
