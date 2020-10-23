@@ -28,4 +28,11 @@ public class Events extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
+
+    public void onClickBack(View view) {
+        Intent i= new Intent(this, Main.class);
+        msg=i.getStringExtra("Main Screen");
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        startActivity(i);
+    }
 }

@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/back"
-        android:layout_width="86dp"
-        android:layout_height="18dp"
+        android:layout_width="89dp"
+        android:layout_height="50dp"
         android:onClick="onClickBack"
         android:text="@string/get_back"
         app:layout_constraintBottom_toBottomOf="parent"
