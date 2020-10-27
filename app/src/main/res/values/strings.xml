@@ -7,4 +7,14 @@
     <string name="login_button">login</string>
     <string name="register_button">register</string>
     <string name="events_button">events</string>
+    <string name="username_text">Username:</string>
+    <string name="password_text">Password:</string>
+    <string name="phone_number_text">Phone Number:</string>
+    <string name="empty_input"> </string>
+    <string name="login_title">LOGIN</string>
+    <string name="register_title">REGISTER</string>
+    <string name="main_title">MAIN</string>
+    <string name="logout_button">logout</string>
+    <string name="update_button">update</string>
+    <string name="update_user_title">UPDATE USER</string>
 </resources>
