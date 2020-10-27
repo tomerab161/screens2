@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class Main extends AppCompatActivity {
@@ -13,7 +14,8 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-    }
+
+   }
 
     public void onClickUpdateUser(View view) {
         Intent i= new Intent(this, UserDetails.class);
@@ -29,7 +31,7 @@ public class Main extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void onClickLouout(View view) {
+    public void onClickLogout(View view) {
         Intent i= new Intent(this, Login.class);
         msg=i.getStringExtra("Login Screen");
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();

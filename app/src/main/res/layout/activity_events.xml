@@ -7,7 +7,7 @@
     tools:context=".Events">
 
     <Button
-        android:id="@+id/newEvent"
+        android:id="@+id/newEventBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.857" />
 
     <Button
-        android:id="@+id/updateEvent"
+        android:id="@+id/updateEventBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClickUpdateEvent"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.392"
-        app:layout_constraintStart_toEndOf="@+id/newEvent"
+        app:layout_constraintStart_toEndOf="@+id/newEventBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.857" />
 
