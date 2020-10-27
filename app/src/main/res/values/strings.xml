@@ -17,4 +17,6 @@
     <string name="logout_button">logout</string>
     <string name="update_button">update</string>
     <string name="update_user_title">UPDATE USER</string>
+    <string name="events_title">EVENTS</string>
+    <string name="user_events_title">my events</string>
 </resources>

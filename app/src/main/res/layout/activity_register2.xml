@@ -87,7 +87,7 @@
         android:autofillHints="@string/empty_input"
         android:ems="10"
         android:hint="@string/empty_input"
-        android:inputType="number|text"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/passwordText"
         app:layout_constraintTop_toTopOf="parent"
@@ -101,7 +101,7 @@
         android:autofillHints="@string/empty_input"
         android:ems="10"
         android:hint="@string/empty_input"
-        android:inputType="textPersonName"
+        android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/phoneNumerText"
         app:layout_constraintTop_toTopOf="parent" />
