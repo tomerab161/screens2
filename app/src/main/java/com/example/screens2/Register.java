@@ -21,4 +21,11 @@ public class Register extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
+
+    public void onClickRegister(View view) {
+        Intent i= new Intent(this, Login.class);
+        msg=i.getStringExtra("Login Screen");
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        startActivity(i);
+    }
 }

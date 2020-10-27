@@ -10,10 +10,12 @@
         android:id="@+id/backBtn"
         android:layout_width="89dp"
         android:layout_height="50dp"
-        android:layout_marginStart="76dp"
+        android:layout_marginStart="68dp"
         android:onClick="onClickBack"
         android:text="@string/get_back"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76" />
@@ -22,12 +24,13 @@
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="44dp"
+        android:onClick="onClickRegister"
         android:text="@string/register_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.761" />
 
     <TextView
         android:id="@+id/usernameText"
