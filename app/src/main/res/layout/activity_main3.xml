@@ -45,6 +45,7 @@
         android:id="@+id/logoutBtn"
         android:layout_width="112dp"
         android:layout_height="60dp"
+        android:onClick="onClickLouout"
         android:text="@string/logout_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
