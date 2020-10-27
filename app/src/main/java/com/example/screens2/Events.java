@@ -22,9 +22,9 @@ public class Events extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void onClickUpdateEvent(View view) {
-        Intent i= new Intent(this, UpdateEvent.class);
-        msg=i.getStringExtra("Update Event Screen");
+    public void onClickMyEvent(View view) {
+        Intent i= new Intent(this, UserEvents.class);
+        msg=i.getStringExtra("User Events Screen");
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }

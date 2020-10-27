@@ -19,7 +19,7 @@ public class Main extends AppCompatActivity {
 
     public void onClickUpdateUser(View view) {
         Intent i= new Intent(this, UserDetails.class);
-        msg=i.getStringExtra("User Details Screen");
+        msg=i.getStringExtra("Update User Screen");
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
