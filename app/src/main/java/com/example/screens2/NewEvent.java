@@ -21,4 +21,18 @@ public class NewEvent extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
+
+    public void onClickTimeInput(View view) {
+        Intent i= new Intent(this, Time.class);
+        msg=i.getStringExtra("Choose Time");
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        startActivity(i);
+    }
+
+    public void onClickDateInput(View view) {
+        Intent i= new Intent(this, Date.class);
+        msg=i.getStringExtra("Choose Date");
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        startActivity(i);
+    }
 }

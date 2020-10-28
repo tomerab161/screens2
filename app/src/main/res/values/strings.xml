@@ -28,4 +28,6 @@
     <string name="meeting_time_text">Time:</string>
     <string name="meeting_members">Members:</string>
     <string name="delete_button">delete</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
 </resources>

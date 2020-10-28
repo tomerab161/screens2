@@ -32,6 +32,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/meeting_date_text"
@@ -41,7 +42,7 @@
         app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.326" />
+        app:layout_constraintVertical_bias="0.328" />
 
     <TextView
         android:id="@+id/textView4"
@@ -107,5 +108,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.656" />
+
+    <EditText
+        android:id="@+id/timeInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="@string/empty_input"
+        android:ems="10"
+        android:hint="@string/empty_input"
+        android:inputType="time"
+        android:onClick="onClickTimeInput"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.206"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421" />
+
+    <EditText
+        android:id="@+id/dateInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:autofillHints="@string/empty_input"
+        android:ems="10"
+        android:hint="@string/empty_input"
+        android:inputType="date"
+        android:onClick="onClickDateInput"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
