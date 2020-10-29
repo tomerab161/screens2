@@ -17,7 +17,7 @@ public class Login extends AppCompatActivity {
 
     public void onClickRegister(View view) {
         Intent i= new Intent(this, Register.class);
-        msg=i.getStringExtra("Login Screen");
+        msg=i.getStringExtra("Register Screen");
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
