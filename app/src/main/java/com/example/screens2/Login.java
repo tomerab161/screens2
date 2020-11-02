@@ -17,14 +17,14 @@ public class Login extends AppCompatActivity {
 
     public void onClickRegister(View view) {
         Intent i= new Intent(this, Register.class);
-        msg=i.getStringExtra("Register Screen");
+        msg="Register Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 
     public void onClickLogin(View view) {
         Intent i= new Intent(this, Main.class);
-        msg=i.getStringExtra("Main Screen");
+        msg="Main Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }

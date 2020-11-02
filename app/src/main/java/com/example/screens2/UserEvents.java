@@ -17,14 +17,14 @@ public class UserEvents extends AppCompatActivity {
 
     public void onClickUpdateEvent(View view) {
         Intent i= new Intent(this, UpdateEvent.class);
-        msg=i.getStringExtra("Update Event Screen");
+        msg="Update Event Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 
     public void onClickBack(View view) {
         Intent i= new Intent(this, Events.class);
-        msg=i.getStringExtra("Events Screen");
+        msg="Events Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }

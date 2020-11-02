@@ -17,21 +17,21 @@ public class NewEvent extends AppCompatActivity {
 
     public void onClickBack(View view) {
         Intent i= new Intent(this, Events.class);
-        msg=i.getStringExtra("Events Screen");
+        msg="Events Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 
     public void onClickTimeInput(View view) {
         Intent i= new Intent(this, Time.class);
-        msg=i.getStringExtra("Choose Time");
+        msg="Choose Time";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 
     public void onClickDateInput(View view) {
         Intent i= new Intent(this, Date.class);
-        msg=i.getStringExtra("Choose Date");
+        msg="Choose Date";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }

@@ -19,21 +19,21 @@ public class Main extends AppCompatActivity {
 
     public void onClickUpdateUser(View view) {
         Intent i= new Intent(this, UserDetails.class);
-        msg=i.getStringExtra("Update User Screen");
+        msg="Update User Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 
     public void onClickEvents(View view) {
         Intent i= new Intent(this, Events.class);
-        msg=i.getStringExtra("Events Screen");
+        msg="Events Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 
     public void onClickLogout(View view) {
         Intent i= new Intent(this, Login.class);
-        msg=i.getStringExtra("Login Screen");
+        msg="Login Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
