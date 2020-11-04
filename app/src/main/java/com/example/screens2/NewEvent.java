@@ -31,6 +31,7 @@ public class NewEvent extends AppCompatActivity {
 
     public void onClickDateInput(View view) {
         Intent i= new Intent(this, Date.class);
+        i.putExtra("activity","first");
         msg="Choose Date";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
