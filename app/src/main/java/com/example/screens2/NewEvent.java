@@ -6,18 +6,54 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class NewEvent extends AppCompatActivity {
     String msg="";
     int date_Value=0;
     int time_Value=0;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+
+        final ListView lv = findViewById(R.id.membersList);
+        final Button addItem = findViewById(R.id.addMemberBtn);
+
+        final EditText membersInput=findViewById(R.id.membersInput);
+        String[] members=new String[]{"0546605845"};
+
+        final List<String> members_list=new ArrayList<String>(Arrays.asList(members));
+        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(NewEvent.this,android.R.layout.simple_list_item_1,members_list);
+
+        lv.setAdapter(arrayAdapter);
+
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(membersInput.getText()!=null)
+                {
+                    String item=String.valueOf(membersInput.getText());
+                    members_list.add(item);
+                    arrayAdapter.notifyDataSetChanged();
+                    membersInput.setText(null);
+
+                }
+            }
+        });
     }
+
 
     public void onClickBack(View view) {
         Intent i= new Intent(this, Events.class);
@@ -79,4 +115,5 @@ public class NewEvent extends AppCompatActivity {
                 }
             }
     }
+
 }
