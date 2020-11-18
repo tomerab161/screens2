@@ -1,11 +1,14 @@
 package com.example.screens2;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,13 +35,14 @@ public class NewEvent extends AppCompatActivity {
         final Button addItem = findViewById(R.id.addMemberBtn);
 
         final EditText membersInput=findViewById(R.id.membersInput);
-        String[] members=new String[]{"0546605845"};
+        String[] members=new String[]{"0546605845"};//user phone
 
         final List<String> members_list=new ArrayList<String>(Arrays.asList(members));
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(NewEvent.this,android.R.layout.simple_list_item_1,members_list);
 
         lv.setAdapter(arrayAdapter);
 
+        //add item to listView
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +54,26 @@ public class NewEvent extends AppCompatActivity {
                     membersInput.setText(null);
 
                 }
+            }
+        });
+
+        //delete item from listView
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(NewEvent.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete this item?");
+
+                final int positionToRemove=position;
+
+                adb.setNegativeButton("Cancel",null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        members_list.remove(positionToRemove);
+                        arrayAdapter.notifyDataSetChanged();
+                    }});
+                adb.show();
             }
         });
     }

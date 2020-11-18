@@ -17,7 +17,7 @@
         app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.947" />
 
     <TextView
         android:id="@+id/newEventTitle"
@@ -107,7 +107,7 @@
         app:layout_constraintHorizontal_bias="0.715"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.89" />
+        app:layout_constraintVertical_bias="0.947" />
 
     <EditText
         android:id="@+id/dateInput"
@@ -153,7 +153,7 @@
     <Button
         android:id="@+id/addMemberBtn"
         android:layout_width="48dp"
-        android:layout_height="46dp"
+        android:layout_height="48dp"
         android:text="+"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -166,10 +166,10 @@
     <ListView
         android:id="@+id/membersList"
         android:layout_width="395dp"
-        android:layout_height="112dp"
+        android:layout_height="158dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.767" />
+        app:layout_constraintVertical_bias="0.835" />
 </androidx.constraintlayout.widget.ConstraintLayout>

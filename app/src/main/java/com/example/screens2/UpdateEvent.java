@@ -1,13 +1,23 @@
 package com.example.screens2;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class UpdateEvent extends AppCompatActivity {
     String msg="";
@@ -17,6 +27,52 @@ public class UpdateEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_event);
+
+        final ListView lv = findViewById(R.id.membersList);
+        final Button addItem = findViewById(R.id.addMemberBtn);
+
+        final EditText membersInput=findViewById(R.id.membersInput);
+        String[] members=new String[]{"0546605845"};//user phones list
+
+        final List<String> members_list=new ArrayList<String>(Arrays.asList(members));
+        final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(UpdateEvent.this,android.R.layout.simple_list_item_1,members_list);
+
+        lv.setAdapter(arrayAdapter);
+
+        //add item to listView
+        addItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(membersInput.getText()!=null)
+                {
+                    String item=String.valueOf(membersInput.getText());
+                    members_list.add(item);
+                    arrayAdapter.notifyDataSetChanged();
+                    membersInput.setText(null);
+
+                }
+            }
+        });
+
+        //delete item from listView
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder adb=new AlertDialog.Builder(UpdateEvent.this);
+                adb.setTitle("Delete?");
+                adb.setMessage("Are you sure you want to delete this item?");
+
+                final int positionToRemove=position;
+
+                adb.setNegativeButton("Cancel",null);
+                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        members_list.remove(positionToRemove);
+                        arrayAdapter.notifyDataSetChanged();
+                    }});
+                adb.show();
+            }
+        });
     }
 
     public void onClickBack(View view) {
