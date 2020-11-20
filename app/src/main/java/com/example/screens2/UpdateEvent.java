@@ -60,7 +60,7 @@ public class UpdateEvent extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder adb=new AlertDialog.Builder(UpdateEvent.this);
                 adb.setTitle("Delete?");
-                adb.setMessage("Are you sure you want to delete this item?");
+                adb.setMessage("Do you want to delete this item?");
 
                 final int positionToRemove=position;
 
