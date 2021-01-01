@@ -46,9 +46,19 @@ public class UpdateEvent extends AppCompatActivity {
                 if(membersInput.getText()!=null)
                 {
                     String item=String.valueOf(membersInput.getText());
-                    members_list.add(item);
-                    arrayAdapter.notifyDataSetChanged();
-                    membersInput.setText(null);
+                    if(item.length()==10) {
+                        members_list.add(item);
+                        arrayAdapter.notifyDataSetChanged();
+                        membersInput.setText(null);
+                    }
+                    else {
+                            AlertDialog.Builder adb1 = new AlertDialog.Builder(UpdateEvent.this);
+                            adb1.setTitle("Invalid Input");
+                            adb1.setMessage("Phone number not in right length");
+                            adb1.setNegativeButton("Ok", null);
+                            adb1.show();
+                            membersInput.setText(null);
+                    }
 
                 }
             }

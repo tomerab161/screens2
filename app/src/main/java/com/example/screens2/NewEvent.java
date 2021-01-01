@@ -37,7 +37,7 @@ public class NewEvent extends AppCompatActivity {
         final EditText membersInput=findViewById(R.id.membersInput);
         String[] members=new String[]{"0546605845"};//user phone
 
-        final List<String> members_list=new ArrayList<String>(Arrays.asList(members));
+        final List<String> members_list=new ArrayList<String>(Arrays.asList(members));//maybe add picture(use hashMap)
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(NewEvent.this,android.R.layout.simple_list_item_1,members_list);
 
         lv.setAdapter(arrayAdapter);
@@ -49,10 +49,20 @@ public class NewEvent extends AppCompatActivity {
                 if(membersInput.getText()!=null)
                 {
                     String item=String.valueOf(membersInput.getText());
-                    members_list.add(item);
-                    arrayAdapter.notifyDataSetChanged();
-                    membersInput.setText(null);
+                    if(item.length()==10) {
+                        members_list.add(item);
 
+                        arrayAdapter.notifyDataSetChanged();
+                        membersInput.setText(null);
+                    }
+                    else {
+                        AlertDialog.Builder adb1 = new AlertDialog.Builder(NewEvent.this);
+                        adb1.setTitle("Invalid Input");
+                        adb1.setMessage("Phone number not in right length");
+                        adb1.setNegativeButton("Ok", null);
+                        adb1.show();
+                        membersInput.setText(null);
+                    }
                 }
             }
         });
