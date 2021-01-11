@@ -18,19 +18,10 @@ import java.util.List;
 
 public class UserEvents extends AppCompatActivity {
     String msg="";
-    CalendarView calendarView=findViewById(R.id.calendarView);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_events);
-
-        /*calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String date=(month+1)+"/"+dayOfMonth+"/"+year;
-
-            }
-        });*/
     }
 
     public void onClickUpdateEvent(View view) {

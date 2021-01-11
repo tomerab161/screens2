@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Time"></activity>
         <activity android:name=".Date" />
-        <activity android:name=".UserEvents" />
+        <activity android:name=".UserEvents" ></activity>
         <activity android:name=".NewEvent" />
         <activity android:name=".UpdateEvent" />
         <activity android:name=".Events" />

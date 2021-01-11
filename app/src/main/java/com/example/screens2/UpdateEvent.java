@@ -27,12 +27,22 @@ public class UpdateEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_event);
-
+        /////demo
+        EditText name=findViewById(R.id.meetingNameInput);
+        EditText date=findViewById(R.id.dateInput);
+        EditText time= findViewById(R.id.timeInput);
+        EditText text=findViewById(R.id.contextInput);
+        name.setText("zoom");
+        date.setText("12/2/2020");
+        time.setText("14:20");
+        text.setText("link to zoom...");
+        String[] members=new String[]{"0546605841","0546605847","0546605844","0548821680","0548821685"};
+        ////
         final ListView lv = findViewById(R.id.membersList);
         final Button addItem = findViewById(R.id.addMemberBtn);
 
         final EditText membersInput=findViewById(R.id.membersInput);
-        String[] members=new String[]{"0546605845"};//user phones list
+        //String[] members=new String[]{"0546605841"};//user phones list
 
         final List<String> members_list=new ArrayList<String>(Arrays.asList(members));
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(UpdateEvent.this,android.R.layout.simple_list_item_1,members_list);
