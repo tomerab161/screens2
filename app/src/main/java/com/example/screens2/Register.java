@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class Register extends AppCompatActivity {
@@ -23,9 +24,19 @@ public class Register extends AppCompatActivity {
     }
 
     public void onClickRegister(View view) {
-        Intent i= new Intent(this, Login.class);
-        msg="Login Screen";
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-        startActivity(i);
+        Dal dal = new Dal(this);
+        EditText username = findViewById(R.id.usernameInput);
+        EditText password = findViewById(R.id.passwordInput);
+        EditText phone_number = findViewById(R.id.phoneNumberInput);
+        if(dal.addUser(username.getText().toString(), password.getText().toString(), phone_number.getText().toString())) {
+            Intent i = new Intent(this, Main.class);
+            msg = "Register Succesful";
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            startActivity(i);
+        }
+        else{
+            msg = "Register failed";
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }
