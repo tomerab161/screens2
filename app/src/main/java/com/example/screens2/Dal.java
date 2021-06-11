@@ -3,6 +3,7 @@ package com.example.screens2;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -16,13 +17,13 @@ public class Dal extends SQLiteAssetHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
 
-        String st = "select * from Users where Name=\"" + username + "\"";
+        String st = "select * from users where username=\"" + username + "\"";
         Cursor cursor = db.rawQuery(st, null);
         // No other user with the same username exists
 
         if(cursor.getCount() == 0)
         {
-            String sql_INSERT = "insert into Users (username, password, phone_number) values(?,?,?)";
+            String sql_INSERT = "insert into users (username, password, phone_number) values(?,?,?)";
             SQLiteStatement statement = db.compileStatement(sql_INSERT);
 
             statement.bindString(1, username);
@@ -38,9 +39,96 @@ public class Dal extends SQLiteAssetHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String st = "select * from Users where username=\"" + username + "\" and password=\"" + password +"\"";
+        String st = "select * from users where username=\"" + username + "\" and password=\"" + password +"\"";
         Cursor cursor = db.rawQuery(st, null);
 
         return cursor.getCount() != 0; // Check if user exists
+    }
+
+    //getUser()
+
+    //updateUser()
+
+    public boolean deleteUser(String username)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "select * from users where username=\"" + username + "\"";
+        Cursor cursor = db.rawQuery(st, null);
+        // if user exist
+
+        if(cursor.getCount() == 1)
+        {
+            String sql_DELETE = "delete from users where username=?";
+            SQLiteStatement statement = db.compileStatement(sql_DELETE);
+
+            statement.bindString(1, username);
+            statement.execute();
+            return true; // delete succeeded
+        }
+        return false; // delete failed
+    }
+
+    public boolean addEvent(int id,String eventName, String date, String time, String link, String[] members)
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "select * from events where event_name=\"" + eventName + "\"";
+        Cursor cursor = db.rawQuery(st, null);
+        // No other user with the same username exists
+
+        if(cursor.getCount() == 0)
+        {
+            String sql_INSERT = "insert into events (_id,event_name, date, time, link) values(?,?,?,?,?)";
+            SQLiteStatement statement = db.compileStatement(sql_INSERT);
+
+            statement.bindLong(1, id);
+            statement.bindString(2, eventName);
+            statement.bindString(3, date);
+            statement.bindString(4, time);
+            statement.bindString(5, link);
+            statement.execute();
+            for(int i=0;i<members.length;i++){
+                //insert all phone numbers
+                sql_INSERT = "insert into members (_id,event_name,phone_number) values(?,?,?)";
+                SQLiteStatement statement1 = db.compileStatement(sql_INSERT);
+
+                statement1.bindLong(1,id);
+                statement1.bindString(2,eventName);
+                statement1.bindString(3,members[i]);
+                statement1.execute();
+            }
+            return true; // Register succeeded
+        }
+        return false; // Register failed
+    }
+
+    //updateEvent
+
+    public boolean deleteEvent(int id, String eventName)//not finished
+    {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "select * from events where event_name=\"" + eventName + "\" and _id=\"+id+\"";
+        Cursor cursor = db.rawQuery(st, null);
+        // if user exist
+
+        if(cursor.getCount() == 1)
+        {
+            String sql_DELETE = "delete from events where event_name=? and _id=?";//delete event
+            SQLiteStatement statement = db.compileStatement(sql_DELETE);
+
+            statement.bindString(1, eventName);
+            statement.bindLong(2,id);
+            statement.execute();
+            String sql_DELETE2 = "delete from members where event_name=? and _id=?";//delete event members
+            SQLiteStatement statement2 = db.compileStatement(sql_DELETE2);
+
+            statement2.bindString(1,eventName);
+            statement2.bindLong(2,id);
+            statement2.execute();
+            return true; // delete succeeded
+        }
+        return false; // delete failed
     }
 }
