@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UserEvents">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        android:layout_width="322dp"
-        android:layout_height="322dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.317" />
-
-    <Button
-        android:id="@+id/updateEventBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickUpdateEvent"
-        android:text="@string/update_event"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.216"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
-
     <TextView
         android:id="@+id/userEventTitle"
         android:layout_width="wrap_content"
@@ -54,15 +30,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.879" />
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete_button"
+    <ListView
+        android:id="@+id/eventsListView"
+        android:layout_width="306dp"
+        android:layout_height="440dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74" />
+        app:layout_constraintVertical_bias="0.422" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,14 +28,19 @@ public class Register extends AppCompatActivity {
         EditText username = findViewById(R.id.usernameInput);
         EditText password = findViewById(R.id.passwordInput);
         EditText phone_number = findViewById(R.id.phoneNumberInput);
-        if(dal.addUser(username.getText().toString(), password.getText().toString(), phone_number.getText().toString())) {
-            Intent i = new Intent(this, Main.class);
-            msg = "Register Succesful";
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-            startActivity(i);
+        if(username.getText().toString() != null && password.getText().toString() != null && phone_number.getText().toString() != null) {
+            if (dal.addUser(username.getText().toString(), password.getText().toString(), phone_number.getText().toString())) {
+                Intent i = new Intent(this, Main.class);
+                msg = "Register Succesful";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            } else {
+                msg = "Register failed";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            }
         }
         else{
-            msg = "Register failed";
+            msg = "param can't be null";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }

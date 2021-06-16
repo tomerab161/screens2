@@ -39,7 +39,7 @@ public class Dal extends SQLiteAssetHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String st = "select * from users where username=\"" + username + "\" and password=\"" + password +"\"";
+        String st = "select _id from users where username=\"" + username + "\" and password=\"" + password +"\"";
         Cursor cursor = db.rawQuery(st, null);
 
         return cursor.getCount() != 0; // Check if user exists
