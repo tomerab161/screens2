@@ -23,19 +23,23 @@ public class NewEvent extends AppCompatActivity {
     String msg="";
     int date_Value=0;
     int time_Value=0;
-
-
+    Intent data;
+    User user;
+    String[] members;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_event);
+        data = getIntent();
 
         final ListView lv = findViewById(R.id.membersList);
         final Button addItem = findViewById(R.id.addMemberBtn);
 
         final EditText membersInput=findViewById(R.id.membersInput);
-        String[] members=new String[]{"0546605845"};//user phone
+        Dal dal=new Dal(this);
+        user=dal.getUser(data.getStringExtra("username"));
+        members=new String[]{user.getPhone_number()};//user phone
 
         final List<String> members_list=new ArrayList<String>(Arrays.asList(members));//maybe add picture(use hashMap)
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(NewEvent.this,android.R.layout.simple_list_item_1,members_list);
@@ -91,6 +95,7 @@ public class NewEvent extends AppCompatActivity {
 
     public void onClickBack(View view) {
         Intent i= new Intent(this, Events.class);
+        i.putExtra("username", data.getStringExtra("username"));
         msg="Events Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
@@ -105,12 +110,10 @@ public class NewEvent extends AppCompatActivity {
 
     public void onClickDateInput(View view) {
         Intent i = new Intent(this, Date.class);
-
         i.putExtra("activity", "first");
         msg = "Choose Date";
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         startActivityForResult(i,date_Value);
-
     }
 
     @Override
@@ -156,9 +159,22 @@ public class NewEvent extends AppCompatActivity {
         EditText date = findViewById(R.id.dateInput);
         EditText time = findViewById(R.id.timeInput);
         EditText context = findViewById(R.id.contextInput);
-        ListView members = findViewById(R.id.membersList);
         if(event_name.getText().toString()!=null && date.getText().toString()!=null && time.getText().toString()!=null && context.getText().toString()!=null){
-            //dal.add
+            if(dal.addEvent(user.get_id(), event_name.getText().toString(), date.getText().toString(), time.getText().toString(), context.getText().toString(), members)){
+                Intent i= new Intent(this, Events.class);
+                i.putExtra("username", data.getStringExtra("username"));
+                msg="Succesful create event";
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+            else{
+                msg="Failed create event";
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            msg="Params can't be null";
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -24,10 +24,12 @@ import java.util.List;
 
 public class UserEvents extends AppCompatActivity {
     String msg="";
+    Intent data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_events);
+        data = getIntent();
 
         final ListView lv = findViewById(R.id.eventsListView);
 
@@ -69,6 +71,7 @@ public class UserEvents extends AppCompatActivity {
 
     public void onClickBack(View view) {
         Intent i= new Intent(this, Events.class);
+        i.putExtra("username", data.getStringExtra("username"));
         msg="Events Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
@@ -76,6 +79,7 @@ public class UserEvents extends AppCompatActivity {
 
     public void onClickAddEvent(View view) {
         Intent i= new Intent(this, NewEvent.class);
+        i.putExtra("username", data.getStringExtra("username"));
         msg="Add event Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);

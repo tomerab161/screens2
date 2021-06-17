@@ -28,11 +28,11 @@ public class UpdateEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_event);
         /////demo
-        EditText name=findViewById(R.id.meetingNameInput);
+        //EditText name=findViewById(R.id.meetingNameInput);
         EditText date=findViewById(R.id.dateInput);
         EditText time= findViewById(R.id.timeInput);
         EditText text=findViewById(R.id.contextInput);
-        name.setText("zoom");
+        //name.setText("zoom");
         date.setText("12/2/2020");
         time.setText("14:20");
         text.setText("link to zoom...");

@@ -36,7 +36,6 @@ public class Main extends AppCompatActivity {
 
     public void onClickLogout(View view) {
         Intent i= new Intent(this, Login.class);
-        i.putExtra("username",data.getStringExtra("username"));
         msg="Login Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
