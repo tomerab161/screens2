@@ -31,6 +31,7 @@ public class Register extends AppCompatActivity {
         if(username.getText().toString() != null && password.getText().toString() != null && phone_number.getText().toString() != null) {
             if (dal.addUser(username.getText().toString(), password.getText().toString(), phone_number.getText().toString())) {
                 Intent i = new Intent(this, Main.class);
+                i.putExtra("username",username.getText().toString());
                 msg = "Register Succesful";
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                 startActivity(i);
