@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
@@ -45,9 +46,27 @@ public class Dal extends SQLiteAssetHelper {
         return cursor.getCount() != 0; // Check if user exists
     }
 
-    //getUser()
+    public User getUser(String username){
+        SQLiteDatabase db = getWritableDatabase();
 
-    //updateUser()
+        String st = "select * from users where username=\"" + username + "\"";
+        Cursor cursor = db.rawQuery(st, null);
+        Log.i("tomer1",cursor.getString(0));
+        User user=new User();
+
+        user.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex("_id"))));
+        user.setUsername(cursor.getString(cursor.getColumnIndex("username")));
+        user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+        user.setPhone_number(cursor.getString(cursor.getColumnIndex("phone_number")));
+        return user;
+    }
+
+    public void updateUser(int id, String username, String password, String phone_number){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "update users set username=\"" + username + "\" and password=\"" + password + "\" and username=\"" + username + "\" where _id="+String.valueOf(id);
+        Cursor cursor = db.rawQuery(st, null);
+    }
 
     public boolean deleteUser(String username)
     {
@@ -105,11 +124,13 @@ public class Dal extends SQLiteAssetHelper {
 
     //updateEvent
 
+    //getEvent
+
     public boolean deleteEvent(int id, String eventName)//not finished
     {
         SQLiteDatabase db = getWritableDatabase();
 
-        String st = "select * from events where event_name=\"" + eventName + "\" and _id=\"+id+\"";
+        String st = "select * from events where event_name=\"" + eventName + "\" and _id="+String.valueOf(id);
         Cursor cursor = db.rawQuery(st, null);
         // if user exist
 

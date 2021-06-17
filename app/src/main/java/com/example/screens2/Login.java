@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity {
         EditText password = findViewById(R.id.passwordInput);
         if(dal.login(username.getText().toString(), password.getText().toString())) {
             Intent i = new Intent(this, Main.class);
+            i.putExtra("username",username.getText().toString());
             msg = "Login Succesful";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             startActivity(i);

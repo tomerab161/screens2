@@ -73,4 +73,11 @@ public class UserEvents extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
+
+    public void onClickAddEvent(View view) {
+        Intent i= new Intent(this, NewEvent.class);
+        msg="Add event Screen";
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        startActivity(i);
+    }
 }

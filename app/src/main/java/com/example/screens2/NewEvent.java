@@ -150,4 +150,15 @@ public class NewEvent extends AppCompatActivity {
             }
     }
 
+    public void onClickCreate(View view) {
+        Dal dal = new Dal(this);
+        EditText event_name = findViewById(R.id.meetingNameInput);
+        EditText date = findViewById(R.id.dateInput);
+        EditText time = findViewById(R.id.timeInput);
+        EditText context = findViewById(R.id.contextInput);
+        ListView members = findViewById(R.id.membersList);
+        if(event_name.getText().toString()!=null && date.getText().toString()!=null && time.getText().toString()!=null && context.getText().toString()!=null){
+            //dal.add
+        }
+    }
 }
