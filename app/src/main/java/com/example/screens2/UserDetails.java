@@ -20,6 +20,7 @@ public class UserDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
         data = getIntent();
+
         Dal dal = new Dal(this);
         User u=dal.getUser(data.getStringExtra("username"));
         username=findViewById(R.id.usernameInput);

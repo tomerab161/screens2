@@ -40,4 +40,18 @@ public class Main extends AppCompatActivity {
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
+
+    public void onClickDeleteUser(View view) {
+        Dal dal = new Dal(this);
+        if(dal.deleteUser(data.getStringExtra("username"))){
+            Intent i= new Intent(this, Login.class);
+            msg="User deleted";
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+            startActivity(i);
+        }
+        else{
+            msg="Delete failed";
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        }
+    }
 }
