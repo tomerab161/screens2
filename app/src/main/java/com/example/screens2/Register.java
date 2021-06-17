@@ -28,15 +28,22 @@ public class Register extends AppCompatActivity {
         EditText username = findViewById(R.id.usernameInput);
         EditText password = findViewById(R.id.passwordInput);
         EditText phone_number = findViewById(R.id.phoneNumberInput);
-        if(username.getText().toString() != null && password.getText().toString() != null && phone_number.getText().toString() != null) {
-            if (dal.addUser(username.getText().toString(), password.getText().toString(), phone_number.getText().toString())) {
-                Intent i = new Intent(this, Main.class);
-                i.putExtra("username",username.getText().toString());
-                msg = "Register Succesful";
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                startActivity(i);
-            } else {
-                msg = "Register failed";
+        if(username.getText().toString() != null && password.getText().toString() != null && phone_number.getText().toString() != null)
+        {
+            if(phone_number.getText().toString().length()==10) {
+                if (dal.addUser(username.getText().toString(), password.getText().toString(), phone_number.getText().toString())) {
+                    Intent i = new Intent(this, Main.class);
+                    i.putExtra("username", username.getText().toString());
+                    msg = "Register Succesful";
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    startActivity(i);
+                } else {
+                    msg = "Register failed";
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                }
+            }
+            else{
+                msg = "Phone number length not right";
                 Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             }
         }

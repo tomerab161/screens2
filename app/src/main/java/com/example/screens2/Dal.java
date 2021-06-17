@@ -51,21 +51,25 @@ public class Dal extends SQLiteAssetHelper {
 
         String st = "select * from users where username=\"" + username + "\"";
         Cursor cursor = db.rawQuery(st, null);
-        Log.i("tomer1",cursor.getString(0));
-        User user=new User();
 
-        user.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex("_id"))));
-        user.setUsername(cursor.getString(cursor.getColumnIndex("username")));
-        user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
-        user.setPhone_number(cursor.getString(cursor.getColumnIndex("phone_number")));
+        User user = new User();
+        if(cursor.moveToFirst()) {
+            user.set_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex("_id"))));
+            user.setUsername(cursor.getString(cursor.getColumnIndex("username")));
+            user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
+            user.setPhone_number(cursor.getString(cursor.getColumnIndex("phone_number")));
+        }
+        cursor.close();
         return user;
     }
 
     public void updateUser(int id, String username, String password, String phone_number){
         SQLiteDatabase db = getWritableDatabase();
 
-        String st = "update users set username=\"" + username + "\" and password=\"" + password + "\" and username=\"" + username + "\" where _id="+String.valueOf(id);
+        String st = "update users set username=\"" + username + "\", password=\"" + password + "\", phone_number=\"" + phone_number + "\" where _id="+String.valueOf(id);
+        Log.i("tomer",st);
         Cursor cursor = db.rawQuery(st, null);
+
     }
 
     public boolean deleteUser(String username)
