@@ -159,8 +159,14 @@ public class NewEvent extends AppCompatActivity {
         EditText date = findViewById(R.id.dateInput);
         EditText time = findViewById(R.id.timeInput);
         EditText context = findViewById(R.id.contextInput);
+        ListView lv=findViewById(R.id.membersList);
         if(event_name.getText().toString()!=null && date.getText().toString()!=null && time.getText().toString()!=null && context.getText().toString()!=null){
-            if(dal.addEvent(user.get_id(), event_name.getText().toString(), date.getText().toString(), time.getText().toString(), context.getText().toString(), members)){
+            String[] m=new String[lv.getAdapter().getCount()];
+            for(int i=0;i<lv.getAdapter().getCount();i++){
+                m[i]=(String)lv.getAdapter().getItem(i);
+            }
+
+            if(dal.addEvent(user.get_id(), event_name.getText().toString(), date.getText().toString(), time.getText().toString(), context.getText().toString(), m)){
                 Intent i= new Intent(this, Events.class);
                 i.putExtra("username", data.getStringExtra("username"));
                 msg="Succesful create event";

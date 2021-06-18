@@ -41,14 +41,22 @@ public class UserDetails extends AppCompatActivity {
     }
 
     public void onClickUpdate(View view) {
-        if(username.getText()!=null && password.getText()!=null && phone_number.getText()!=null){
-            Dal dal = new Dal(this);
-            dal.updateUser(id,username.getText().toString(),password.getText().toString(),phone_number.getText().toString());
-            Intent i= new Intent(this, Main.class);
-            i.putExtra("username",username.getText().toString());
-            msg="Success update user";
-            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-            startActivity(i);
+        if(!username.getText().toString().equals("") && !password.getText().toString().equals("") && !phone_number.getText().toString().equals("")){
+            if(phone_number.getText().toString().length()!=10) {
+                Dal dal = new Dal(this);
+                dal.updateUser(id, username.getText().toString(), password.getText().toString(), phone_number.getText().toString());
+                Intent i = new Intent(this, Main.class);
+                i.putExtra("username", username.getText().toString());
+                msg = "Success update user";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }
+            else{
+                msg="Invalid phone number";
+                Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(getIntent());
+            }
         }
         else{
             msg="Params can't be null";

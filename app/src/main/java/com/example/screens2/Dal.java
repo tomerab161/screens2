@@ -106,8 +106,7 @@ public class Dal extends SQLiteAssetHelper {
         String member="tomer";
         if(cursor.getCount() == 0)
         {
-            Log.i("tomer","check");
-            String sql_INSERT = "insert into events (_id,event_name, date, time, link, members) values(?,?,?,?,?,?)";
+            String sql_INSERT = "insert into events (_id,event_name, date, time, link) values(?,?,?,?,?)";
             SQLiteStatement statement = db.compileStatement(sql_INSERT);
 
             statement.bindLong(1, id);
@@ -115,24 +114,32 @@ public class Dal extends SQLiteAssetHelper {
             statement.bindString(3, date);
             statement.bindString(4, time);
             statement.bindString(5, link);
-            statement.bindString(6, member);
             statement.execute();
             for(int i=0;i<members.length;i++){
                 //insert all phone numbers
-                sql_INSERT = "insert into members (_id,event_name,phone_number) values(?,?,?)";
-                SQLiteStatement statement1 = db.compileStatement(sql_INSERT);
+                ContentValues contentValues=new ContentValues();
 
-                statement1.bindLong(1,id);
-                statement1.bindString(2,eventName);
-                statement1.bindString(3,members[i]);
-                statement1.execute();
+                contentValues.put("_id", id);
+                contentValues.put("event_name",eventName);
+                contentValues.put("phone_number", members[i]);
+                Log.i("tomer", members[i]);
+                db.insert("members", null, contentValues);
             }
             return true; // Register succeeded
         }
         return false; // Register failed
     }
 
-    //updateEvent
+    public void updateEvent(int id, String event_name, String date, String time, String link){
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("date",date);
+        contentValues.put("time", time);
+        contentValues.put("link", link);
+
+        db.update("events", contentValues, "_id=? and event_name=?", new String[]{String.valueOf(id), event_name});
+    }
 
     public Event getEvent(int id, String event_name){
         SQLiteDatabase db = getWritableDatabase();
@@ -206,5 +213,38 @@ public class Dal extends SQLiteAssetHelper {
             return true; // delete succeeded
         }
         return false; // delete failed
+    }
+
+    public void deletePhoneNumber(int id, String event_name, String phone_number){
+        SQLiteDatabase db = getWritableDatabase();
+        String sql_DELETE = "delete from members where event_name=? and _id=? and phone_number=?";//delete event members
+        SQLiteStatement statement = db.compileStatement(sql_DELETE);
+
+        statement.bindString(1,event_name);
+        statement.bindLong(2,id);
+        statement.bindString(3,phone_number);
+        statement.execute();
+    }
+
+    public boolean addPhoneNumber(int id, String event_name, String phone_number){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "select * from members where event_name=\""+ event_name+"\" and phone_number=\""+phone_number+"\" and _id="+String.valueOf(id);
+        Cursor cursor = db.rawQuery(st, null);
+        // No other phone number exist
+
+        if(cursor.getCount() == 0)
+        {
+            String sql_INSERT = "insert into members (_id,event_name,phone_number) values(?,?,?)";
+            SQLiteStatement statement1 = db.compileStatement(sql_INSERT);
+
+            statement1.bindLong(1,id);
+            statement1.bindString(2,event_name);
+            statement1.bindString(3,phone_number);
+
+            statement1.execute();
+            return true; // Register succeeded
+        }
+        return false;
     }
 }
