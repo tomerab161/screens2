@@ -96,13 +96,15 @@ public class Dal extends SQLiteAssetHelper {
     {
         SQLiteDatabase db = getWritableDatabase();
 
-        String st = "select * from events where event_name=\"" + eventName + "\"";
+        String st = "select * from events where event_name=\"" + eventName + "\" and _id="+String.valueOf(id);
         Cursor cursor = db.rawQuery(st, null);
         // No other user with the same username exists
 
+        String member="tomer";
         if(cursor.getCount() == 0)
         {
-            String sql_INSERT = "insert into events (_id,event_name, date, time, link) values(?,?,?,?,?)";
+            Log.i("tomer","check");
+            String sql_INSERT = "insert into events (_id,event_name, date, time, link, members) values(?,?,?,?,?,?)";
             SQLiteStatement statement = db.compileStatement(sql_INSERT);
 
             statement.bindLong(1, id);
@@ -110,6 +112,7 @@ public class Dal extends SQLiteAssetHelper {
             statement.bindString(3, date);
             statement.bindString(4, time);
             statement.bindString(5, link);
+            statement.bindString(6, member);
             statement.execute();
             for(int i=0;i<members.length;i++){
                 //insert all phone numbers
@@ -128,7 +131,52 @@ public class Dal extends SQLiteAssetHelper {
 
     //updateEvent
 
-    //getEvent
+    public Event getEvent(int id, String event_name){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "select * from events where event_name=\"" + event_name + "\" and _id="+String.valueOf(id);
+        Cursor cursor = db.rawQuery(st, null);
+
+        Event event=new Event();
+        if(cursor.moveToFirst()) {
+            event.set_id(id);
+            event.setEventName(event_name);
+            event.setDate(cursor.getString(cursor.getColumnIndex("date")));
+            event.setTime(cursor.getString(cursor.getColumnIndex("time")));
+            event.setLink(cursor.getString(cursor.getColumnIndex("link")));
+
+            cursor.close();
+
+            st = "select * from members where event_name=\"" + event_name + "\" and _id="+String.valueOf(id);
+            cursor = db.rawQuery(st, null);
+
+            String[] phones=new String[cursor.getCount()];
+            int i=0;
+            while(cursor.moveToNext()){
+                phones[i]=cursor.getString(cursor.getColumnIndex("phone_number"));
+                i++;
+            }
+            event.setMembers(phones);
+        }
+        cursor.close();
+        return event;
+    }
+
+    public String[] getEvents(int id){
+        SQLiteDatabase db = getWritableDatabase();
+
+        String st = "select * from events where _id="+String.valueOf(id);
+        Cursor cursor = db.rawQuery(st, null);
+
+        String[] events_names = new String[cursor.getCount()];
+        int i=0;
+        while (cursor.moveToNext()){
+            Log.i("tomer", cursor.getString(cursor.getColumnIndex("event_name")));
+            events_names[i]= cursor.getString(cursor.getColumnIndex("event_name"));
+            i++;
+        }
+        return events_names;
+    }
 
     public boolean deleteEvent(int id, String eventName)//not finished
     {

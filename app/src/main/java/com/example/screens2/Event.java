@@ -27,6 +27,9 @@ class Event {
         return members;
     }
 
+    public void set_id(int _id) {
+        this._id = _id;
+    }
     public void setTime(String time) {
         this.time = time;
     }

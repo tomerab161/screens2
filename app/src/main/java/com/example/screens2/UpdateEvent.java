@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,28 +22,34 @@ import java.util.List;
 
 public class UpdateEvent extends AppCompatActivity {
     String msg="";
+    Intent data;
     int time_Value=0;
     int date_Value=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_event);
-        /////demo
-        //EditText name=findViewById(R.id.meetingNameInput);
+        data =getIntent();
+
+        TextView eventName= findViewById(R.id.eventNameTitle);
         EditText date=findViewById(R.id.dateInput);
         EditText time= findViewById(R.id.timeInput);
-        EditText text=findViewById(R.id.contextInput);
-        //name.setText("zoom");
-        date.setText("12/2/2020");
-        time.setText("14:20");
-        text.setText("link to zoom...");
-        String[] members=new String[]{"0546605841","0546605847","0546605844","0548821680","0548821685"};
-        ////
+        EditText link=findViewById(R.id.contextInput);
+
+        Dal dal = new Dal(this);
+        User user=dal.getUser(data.getStringExtra("username"));
+        Event event=dal.getEvent(user.get_id(), data.getStringExtra("event_name"));
+        String title="Event Name: "+data.getStringExtra("event_name");
+        eventName.setText(title);
+        date.setText(event.getDate());
+        time.setText(event.getTime());
+        link.setText(event.getLink());
+
         final ListView lv = findViewById(R.id.membersList);
         final Button addItem = findViewById(R.id.addMemberBtn);
 
         final EditText membersInput=findViewById(R.id.membersInput);
-        //String[] members=new String[]{"0546605841"};//user phones list
+        String[] members=event.getMembers();//user phones list
 
         final List<String> members_list=new ArrayList<String>(Arrays.asList(members));
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(UpdateEvent.this,android.R.layout.simple_list_item_1,members_list);
@@ -98,6 +105,7 @@ public class UpdateEvent extends AppCompatActivity {
 
     public void onClickBack(View view) {
         Intent i= new Intent(this, UserEvents.class);
+        i.putExtra("username",data.getStringExtra("username"));
         msg="User Events Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);

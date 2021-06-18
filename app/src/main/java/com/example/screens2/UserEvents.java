@@ -33,8 +33,9 @@ public class UserEvents extends AppCompatActivity {
 
         final ListView lv = findViewById(R.id.eventsListView);
 
-        String[] eventsName={"tom","sdvf","adgsf"};
-        //String eventsName=getEvents(id);
+        Dal dal=new Dal(this);
+        User user=dal.getUser(data.getStringExtra("username"));
+        final String[] eventsName= dal.getEvents(user.get_id());
 
         final List<String> members_list=new ArrayList<String>(Arrays.asList(eventsName));
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(UserEvents.this,android.R.layout.simple_list_item_1,members_list);
@@ -44,7 +45,7 @@ public class UserEvents extends AppCompatActivity {
         //delete item from listView
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder adb=new AlertDialog.Builder(UserEvents.this);
                 adb.setTitle("Choose a command");
                 adb.setMessage("Do you want to delete or update this event");
@@ -54,6 +55,8 @@ public class UserEvents extends AppCompatActivity {
                 adb.setNegativeButton("Update",new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i= new Intent(UserEvents.this,UpdateEvent.class);
+                        i.putExtra("username", data.getStringExtra("username"));
+                        i.putExtra("event_name",eventsName[position]);
                         String m="Update event Screen";
                         Toast.makeText(UserEvents.this,msg,Toast.LENGTH_SHORT).show();
                         startActivity(i);
