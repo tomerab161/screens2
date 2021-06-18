@@ -45,7 +45,7 @@ public class UserDetails extends AppCompatActivity {
             Dal dal = new Dal(this);
             dal.updateUser(id,username.getText().toString(),password.getText().toString(),phone_number.getText().toString());
             Intent i= new Intent(this, Main.class);
-            i.putExtra("username",data.getStringExtra("username"));
+            i.putExtra("username",username.getText().toString());
             msg="Success update user";
             Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
             startActivity(i);

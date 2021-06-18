@@ -1,5 +1,6 @@
 package com.example.screens2;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -65,11 +66,13 @@ public class Dal extends SQLiteAssetHelper {
 
     public void updateUser(int id, String username, String password, String phone_number){
         SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
 
-        String st = "update users set username=\"" + username + "\", password=\"" + password + "\", phone_number=\"" + phone_number + "\" where _id="+String.valueOf(id);
-        Log.i("tomer",st);
-        Cursor cursor = db.rawQuery(st, null);
+        contentValues.put("username", username);
+        contentValues.put("password", password);
+        contentValues.put("phone_number", phone_number);
 
+        db.update("users", contentValues, "_id=?", new String[]{String.valueOf(id)});
     }
 
     public boolean deleteUser(String username)
