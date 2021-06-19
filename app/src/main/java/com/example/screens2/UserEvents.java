@@ -20,21 +20,25 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class UserEvents extends AppCompatActivity {
     String msg="";
     Intent data;
+    ListView lv;
+    User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_events);
         data = getIntent();
 
-        final ListView lv = findViewById(R.id.eventsListView);
+        lv = findViewById(R.id.eventsListView);
 
         Dal dal=new Dal(this);
-        User user=dal.getUser(data.getStringExtra("username"));
+        user=dal.getUser(data.getStringExtra("username"));
         final String[] eventsName= dal.getEvents(user.get_id());
 
         final List<String> members_list=new ArrayList<String>(Arrays.asList(eventsName));
@@ -86,5 +90,48 @@ public class UserEvents extends AppCompatActivity {
         msg="Add event Screen";
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
         startActivity(i);
+    }
+
+    public void onClickDeleteEvents(View view) {
+        boolean[] selectedEvent = new boolean[lv.getAdapter().getCount()];
+        final String[] events = new String[lv.getAdapter().getCount()];
+        final ArrayList<Integer> eventsList = new ArrayList<>();
+        for(int i=0;i<lv.getAdapter().getCount();i++){
+            events[i] = (String)lv.getAdapter().getItem(i);
+        }
+        //initial alert
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //alert title
+        builder.setTitle("Select events to delete");
+        //cancel btn
+        builder.setCancelable(true);
+
+        builder.setMultiChoiceItems(events, selectedEvent, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                if(isChecked){
+                    eventsList.add(which);
+                    Collections.sort(eventsList);
+                }
+                else{
+                    eventsList.remove(which);
+                }
+            }
+        });
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Dal dal = new Dal(UserEvents.this);
+                for(int j=0;j<eventsList.size();j++){
+                    dal.deleteEvent(user.get_id(), events[eventsList.get(j)]);
+                }
+                finish();
+                startActivity(getIntent());
+            }
+        });
+
+        builder.show();
+
     }
 }
