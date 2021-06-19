@@ -59,13 +59,14 @@ public class Dal extends SQLiteAssetHelper {
             user.setUsername(cursor.getString(cursor.getColumnIndex("username")));
             user.setPassword(cursor.getString(cursor.getColumnIndex("password")));
             user.setPhone_number(cursor.getString(cursor.getColumnIndex("phone_number")));
+            return user;
         }
-        cursor.close();
-        return user;
+        return null;
     }
 
-    public void updateUser(int id, String username, String password, String phone_number){
+    public boolean updateUser(int id, String username, String password, String phone_number){
         SQLiteDatabase db = getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
 
         contentValues.put("username", username);
@@ -73,6 +74,7 @@ public class Dal extends SQLiteAssetHelper {
         contentValues.put("phone_number", phone_number);
 
         db.update("users", contentValues, "_id=?", new String[]{String.valueOf(id)});
+        return true;
     }
 
     public boolean deleteUser(String username)
@@ -103,7 +105,6 @@ public class Dal extends SQLiteAssetHelper {
         Cursor cursor = db.rawQuery(st, null);
         // No other user with the same username exists
 
-        String member="tomer";
         if(cursor.getCount() == 0)
         {
             String sql_INSERT = "insert into events (_id,event_name, date, time, link) values(?,?,?,?,?)";
@@ -130,15 +131,17 @@ public class Dal extends SQLiteAssetHelper {
         return false; // Register failed
     }
 
-    public void updateEvent(int id, String event_name, String date, String time, String link){
+    public boolean updateEvent(int id, String event_name, String date, String time, String link){
         SQLiteDatabase db = getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put("date",date);
+        contentValues.put("date", date);
         contentValues.put("time", time);
         contentValues.put("link", link);
 
         db.update("events", contentValues, "_id=? and event_name=?", new String[]{String.valueOf(id), event_name});
+        return true;
     }
 
     public Event getEvent(int id, String event_name){

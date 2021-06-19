@@ -185,12 +185,16 @@ public class UpdateEvent extends AppCompatActivity {
     public void onClickUpdate(View view) {
         if(!date.getText().toString().equals("") && !time.getText().toString().equals("") && !link.getText().toString().equals("")){
             Dal dal= new Dal(this);
-            dal.updateEvent(event.get_id(), event.getEventName(), date.getText().toString(), time.getText().toString(), link.getText().toString());
-            Intent i= new Intent(this, UserEvents.class);
-            i.putExtra("username",data.getStringExtra("username"));
-            msg="Success update event";
-            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
-            startActivity(i);
+            if(dal.updateEvent(event.get_id(), event.getEventName(), date.getText().toString(), time.getText().toString(), link.getText().toString())) {
+                Intent i = new Intent(this, UserEvents.class);
+                i.putExtra("username", data.getStringExtra("username"));
+                msg = "Success update event";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                startActivity(i);
+            }else{
+                msg = "Failed update event";
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+            }
         }
         else{
             msg="Params can't be null";

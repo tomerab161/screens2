@@ -42,14 +42,21 @@ public class UserDetails extends AppCompatActivity {
 
     public void onClickUpdate(View view) {
         if(!username.getText().toString().equals("") && !password.getText().toString().equals("") && !phone_number.getText().toString().equals("")){
-            if(phone_number.getText().toString().length()!=10) {
+            if(phone_number.getText().toString().length()==10) {
                 Dal dal = new Dal(this);
-                dal.updateUser(id, username.getText().toString(), password.getText().toString(), phone_number.getText().toString());
-                Intent i = new Intent(this, Main.class);
-                i.putExtra("username", username.getText().toString());
-                msg = "Success update user";
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                startActivity(i);
+                if(dal.getUser(username.getText().toString())==null){
+                    dal.updateUser(id, username.getText().toString(), password.getText().toString(), phone_number.getText().toString());
+                    Intent i = new Intent(this, Main.class);
+                    i.putExtra("username", username.getText().toString());
+                    msg = "Success update user";
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    startActivity(i);
+                }else{
+                    msg = "Username already exist";
+                    Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(getIntent());
+                }
             }
             else{
                 msg="Invalid phone number";

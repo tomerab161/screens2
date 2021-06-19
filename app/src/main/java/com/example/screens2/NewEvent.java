@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -167,6 +168,8 @@ public class NewEvent extends AppCompatActivity {
             }
 
             if(dal.addEvent(user.get_id(), event_name.getText().toString(), date.getText().toString(), time.getText().toString(), context.getText().toString(), m)){
+                //sendSms(m);
+
                 Intent i= new Intent(this, Events.class);
                 i.putExtra("username", data.getStringExtra("username"));
                 msg="Succesful create event";
@@ -181,6 +184,13 @@ public class NewEvent extends AppCompatActivity {
         else{
             msg="Params can't be null";
             Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void sendSms(String[] members){
+        SmsManager smsManager=SmsManager.getDefault();
+        for(int i=0; i<members.length; i++){
+            smsManager.sendTextMessage(members[i], null, "hello", null,null);
         }
     }
 }
