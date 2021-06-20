@@ -37,7 +37,7 @@ public class UserEvents extends AppCompatActivity {
 
         lv = findViewById(R.id.eventsListView);
 
-        Dal dal=new Dal(this);
+        final Dal dal=new Dal(this);
         user=dal.getUser(data.getStringExtra("username"));
         final String[] eventsName= dal.getEvents(user.get_id());
 
@@ -68,7 +68,7 @@ public class UserEvents extends AppCompatActivity {
                 adb.setPositiveButton("Delete", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         members_list.remove(positionToRemove);
-                        //deleteEvent(id,eventName);
+                        dal.deleteEvent(user.get_id(), eventsName[position]);
                         arrayAdapter.notifyDataSetChanged();
                     }});
                 adb.show();

@@ -3,9 +3,12 @@ package com.example.screens2;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
@@ -188,9 +191,11 @@ public class NewEvent extends AppCompatActivity {
     }
 
     public void sendSms(String[] members){
-        SmsManager smsManager=SmsManager.getDefault();
-        for(int i=0; i<members.length; i++){
-            smsManager.sendTextMessage(members[i], null, "hello", null,null);
+        if(ContextCompat.checkSelfPermission(NewEvent.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
+            SmsManager smsManager = SmsManager.getDefault();
+            for (int i = 0; i < members.length; i++) {
+                smsManager.sendTextMessage(members[i], null, "hello", null, null);
+            }
         }
     }
 }

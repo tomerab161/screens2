@@ -52,7 +52,6 @@ public class UpdateEvent extends AppCompatActivity {
         link.setText(event.getLink());
 
         final ListView lv = findViewById(R.id.membersList);
-        final Button addItem = findViewById(R.id.addMemberBtn);
 
         final EditText membersInput=findViewById(R.id.membersInput);
         String[] members=event.getMembers();//user phones list
@@ -61,63 +60,6 @@ public class UpdateEvent extends AppCompatActivity {
         final ArrayAdapter<String> arrayAdapter=new ArrayAdapter<String>(UpdateEvent.this,android.R.layout.simple_list_item_1,members_list);
 
         lv.setAdapter(arrayAdapter);
-
-        //add item to listView
-        addItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(membersInput.getText()!=null)
-                {
-                    String item=String.valueOf(membersInput.getText());
-                    if(item.length()==10) {
-                        if(dal.addPhoneNumber(event.get_id(), event.getEventName(), item)) {
-                            members_list.add(item);
-                            arrayAdapter.notifyDataSetChanged();
-                            membersInput.setText(null);
-                        }
-                        else{
-                            AlertDialog.Builder adb1 = new AlertDialog.Builder(UpdateEvent.this);
-                            adb1.setTitle("Invalid Input");
-                            adb1.setMessage("Phone number already exist");
-                            adb1.setNegativeButton("Ok", null);
-                            adb1.show();
-                            membersInput.setText(null);
-                        }
-                    }
-                    else {
-                            AlertDialog.Builder adb1 = new AlertDialog.Builder(UpdateEvent.this);
-                            adb1.setTitle("Invalid Input");
-                            adb1.setMessage("Phone number not in right length");
-                            adb1.setNegativeButton("Ok", null);
-                            adb1.show();
-                            membersInput.setText(null);
-                    }
-
-                }
-            }
-        });
-
-        //delete item from listView
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                AlertDialog.Builder adb=new AlertDialog.Builder(UpdateEvent.this);
-                adb.setTitle("Delete?");
-                adb.setMessage("Do you want to delete this item?");
-
-                final int positionToRemove=position;
-
-                adb.setNegativeButton("Cancel",null);
-                adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dal.deletePhoneNumber(event.get_id(), event.getEventName(), members_list.get(position));
-                        members_list.remove(positionToRemove);
-                        arrayAdapter.notifyDataSetChanged();
-                    }});
-                adb.show();
-            }
-        });
-
     }
 
     public void onClickBack(View view) {
