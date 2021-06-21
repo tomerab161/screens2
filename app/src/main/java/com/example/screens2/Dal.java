@@ -191,7 +191,7 @@ public class Dal extends SQLiteAssetHelper {
         return events_names;
     }
 
-    public boolean deleteEvent(int id, String eventName)//not finished
+    public boolean deleteEvent(int id, String eventName)
     {
         SQLiteDatabase db = getWritableDatabase();
 

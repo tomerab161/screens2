@@ -15,6 +15,8 @@ public class UserDetails extends AppCompatActivity {
     EditText password;
     EditText phone_number;
     int id;
+    User u;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,7 @@ public class UserDetails extends AppCompatActivity {
         data = getIntent();
 
         Dal dal = new Dal(this);
-        User u=dal.getUser(data.getStringExtra("username"));
+        u=dal.getUser(data.getStringExtra("username"));
         username=findViewById(R.id.usernameInput);
         password=findViewById(R.id.passwordInput);
         phone_number=findViewById(R.id.phoneNumberInput);
@@ -44,7 +46,8 @@ public class UserDetails extends AppCompatActivity {
         if(!username.getText().toString().equals("") && !password.getText().toString().equals("") && !phone_number.getText().toString().equals("")){
             if(phone_number.getText().toString().length()==10) {
                 Dal dal = new Dal(this);
-                if(dal.getUser(username.getText().toString())==null){
+
+                if(dal.getUser(username.getText().toString())==null || u.getUsername().equals(username.getText().toString())){
                     dal.updateUser(id, username.getText().toString(), password.getText().toString(), phone_number.getText().toString());
                     Intent i = new Intent(this, Main.class);
                     i.putExtra("username", username.getText().toString());
